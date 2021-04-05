@@ -6,7 +6,7 @@ scalaVersion := "2.11.12"
 
 idePackagePrefix := Some("org.example.application")
 
-assemblyJarName in assembly := "baeldung-scala-sbt-assembly-fatjar-1.0.jar"
+assemblyJarName in assembly := "scala-pi.jar"
 
 mainClass in assembly := Some("org.example.application.PiExample")
 
