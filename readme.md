@@ -69,8 +69,8 @@ For that, the following are required in the kubernetes cluster:
 
 After the custom resource and the operator are configured, is possible to launch the cluster. 
 
-The folder `run-on-head` contains the cluster [definition](./run-on-head.yaml).  
-The container Docker image used for the head/worker nodes is a [custom Ray image](https://hub.docker.com/repository/docker/kada9001/ray-custom-image) packaged with Java install and the fat `jar` of the `ScalaSparkTest` project. 
+The folder `run-on-head` contains the cluster [definition](https://github.com/MarcoAlejandro/cross_language_ray_experiment/blob/main/run-on-head/example-cluster.yaml).  
+The container Docker image used for the head/worker nodes is a [custom Ray image](https://github.com/MarcoAlejandro/cross_language_ray_experiment/blob/main/run-on-head/Dockerfile) ([Dockerhub](https://hub.docker.com/repository/docker/kada9001/ray-custom-image)) packaged with Java install and the fat `jar` of the `ScalaSparkTest` project. 
 The cluster can be started using: 
 
 ```
@@ -88,7 +88,7 @@ example-cluster-ray-worker-pwxr5   1/1     Running   0          3h47m
 ray-operator-pod                   1/1     Running   0          7d22h
 ```
 
-The folder `run-on-head` also contains a driver for [running the program in the head node](https://docs.ray.io/en/master/cluster/kubernetes.html#running-the-program-on-the-head-node). 
+The folder `run-on-head` also contains a driver in [`script.py`](https://github.com/MarcoAlejandro/cross_language_ray_experiment/blob/main/run-on-head/script.py) for [running the program in the head node](https://docs.ray.io/en/master/cluster/kubernetes.html#running-the-program-on-the-head-node). 
 The driver configures the Java code search path. 
 
 The program can be executed on the cluster to test that the cluster is capable of running Java code using python successfuly: 
