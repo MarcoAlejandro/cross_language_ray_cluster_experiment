@@ -8,7 +8,7 @@ import ray
 
 ray.init(
     address="auto",
-    job_config=ray.job_config.JobConfig(code_search_path='scala-pi.jar'),
+    job_config=ray.job_config.JobConfig(code_search_path=['/home/ray/']),
 )
 
 pi_spark_class = ray.java_actor_class("org.example.application.PiSpark")
