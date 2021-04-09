@@ -4,23 +4,23 @@ This project test the cross language support for Java in Ray.
 
 - `ScalaSparkTest` project is a small scala project using sbt, that calculates the value of PI using Spark. This project is assembled in a fat `.jar`.
 
-- `script_x.py`: A script that executes a java class code from the assembled `jar` as a Ray Actor using python code. 
+- `run-single-machine` contains simple scripts to run the application in Ray using a single laptop/machine.
 
---------
+- `run-on-head` contains one possible way to run the application in a Ray Cluster on K8s with Autoscaler: Run driver in head node.  
 
-## Running the python scripts
+- `run-job` contains one possible way to run the application in a Ray Cluster on K8s with Autoscaler: Run driver as a Job.
 
-- Is required to `assembly` the scala project and generate the fat `scala-pi.jar`. 
+- `Dockerfile` for the Ray custom image to use in the cluster pods.
 
-- Copy the `ScalaSparkTest/target/scala-2.11/scala-pi.jar` to repository root folder. 
-
-- Activate the poetry virtual environment for python dependencies. 
-
-- Execute the python scripts. 
+- `example-cluster.yaml` the kubernetes cluster. 
 
 --------
 
 ## Testing the scripts in a single laptop
+
+Running the scripts in `run-in-single-machine` folder, is straightforward on a single machine/laptop. 
+
+
 
 ### `script_one.py`
 
@@ -69,8 +69,8 @@ For that, the following are required in the kubernetes cluster:
 
 After the custom resource and the operator are configured, is possible to launch the cluster. 
 
-The folder `run-on-head` contains the cluster [definition](https://github.com/MarcoAlejandro/cross_language_ray_experiment/blob/main/run-on-head/example-cluster.yaml).  
-The container Docker image used for the head/worker nodes is a [custom Ray image](https://github.com/MarcoAlejandro/cross_language_ray_experiment/blob/main/run-on-head/Dockerfile) ([Dockerhub](https://hub.docker.com/repository/docker/kada9001/ray-custom-image)) packaged with Java install and the fat `jar` of the `ScalaSparkTest` project. 
+The `example-cluster.yaml` contains the cluster [definition](https://github.com/MarcoAlejandro/cross_language_ray_experiment/blob/main/example-cluster.yaml).  
+The container Docker image used for the head/worker nodes is a [custom Ray image](https://github.com/MarcoAlejandro/cross_language_ray_experiment/blob/main/Dockerfile) ([Dockerhub](https://hub.docker.com/repository/docker/kada9001/ray-custom-image)) packaged with Java install and the fat `jar` of the `ScalaSparkTest` project. 
 The cluster can be started using: 
 
 ```
@@ -88,10 +88,10 @@ example-cluster-ray-worker-pwxr5   1/1     Running   0          3h47m
 ray-operator-pod                   1/1     Running   0          7d22h
 ```
 
-The folder `run-on-head` also contains a driver in [`script.py`](https://github.com/MarcoAlejandro/cross_language_ray_experiment/blob/main/run-on-head/script.py) for [running the program in the head node](https://docs.ray.io/en/master/cluster/kubernetes.html#running-the-program-on-the-head-node). 
+The folder `run-on-head` also contains a driver in [`run_on_head_script.py`](https://github.com/MarcoAlejandro/cross_language_ray_experiment/blob/main/run-on-head/run_on_head_script.py) for [running the program in the head node](https://docs.ray.io/en/master/cluster/kubernetes.html#running-the-program-on-the-head-node). 
 The driver configures the Java code search path. 
 
-The program can be executed on the cluster to test that the cluster is capable of running Java code using python successfuly: 
+The program can be executed on the cluster to test that the cluster is capable of running Java code using python: 
 
 ```
 # Copy the ray program driver to the head node
@@ -113,6 +113,7 @@ The cluster dahsboard while executing the Spark example:
 
 ## Running the application Using a Kubernetes Job
 
+I haven't been able to run this strategy with success. 
 
 -----
 

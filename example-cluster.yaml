@@ -36,7 +36,7 @@ spec:
         containers:
         - name: ray-node
           imagePullPolicy: Always
-          image: kada9001/ray-custom-image:0.1.0
+          image: kada9001/ray-custom-image:0.1.4
           # Do not change this command - it keeps the pod alive until it is
           # explicitly killed.
           command: ["/bin/bash", "-c", "--"]
@@ -90,7 +90,7 @@ spec:
         containers:
         - name: ray-node
           imagePullPolicy: Always
-          image: kada9001/ray-custom-image:0.1.0
+          image: kada9001/ray-custom-image:0.1.4
           command: ["/bin/bash", "-c", "--"]
           args: ["trap : TERM INT; sleep infinity & wait;"]
           ports:
