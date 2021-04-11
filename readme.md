@@ -115,6 +115,9 @@ The cluster dahsboard while executing the Spark example:
 
 I haven't been able to run this strategy with success. 
 
+This discussion might lead to a way to do it: 
+https://discuss.ray.io/t/kubernetes-job-running-a-cross-language-java-class/1631
+
 -----
 
 ## Running the application using the Ray Client  API
