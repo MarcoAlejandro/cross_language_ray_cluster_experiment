@@ -1,9 +1,4 @@
-"""
-Ray driver calling ray.init() and connecting to auto ray runtime. 
 
-Ensure to start ray from the console to run this one:
-    $ ray start --head --port=6379
-"""
 import ray
 
 ray.init(
