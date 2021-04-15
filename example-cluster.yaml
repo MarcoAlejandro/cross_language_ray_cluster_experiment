@@ -36,7 +36,7 @@ spec:
         containers:
         - name: ray-node
           imagePullPolicy: Always
-          image: kada9001/ray-custom-image:0.1.4
+          image: kada9001/ray-custom-image:0.1.5
           # Do not change this command - it keeps the pod alive until it is
           # explicitly killed.
           command: ["/bin/bash", "-c", "--"]
@@ -45,6 +45,10 @@ spec:
           - containerPort: 6379 # Redis port.
           - containerPort: 12345 # Ray internal communication.
           - containerPort: 12346 # Ray internal communication.
+
+          env:
+            - name: CLASSPATH
+              value: "/home/ray/scala-pi.jar"
 
           # This volume allocates shared memory for Ray to use for its plasma
           # object store. If you do not provide this, Ray will fall back to
@@ -90,12 +94,15 @@ spec:
         containers:
         - name: ray-node
           imagePullPolicy: Always
-          image: kada9001/ray-custom-image:0.1.4
+          image: kada9001/ray-custom-image:0.1.5
           command: ["/bin/bash", "-c", "--"]
           args: ["trap : TERM INT; sleep infinity & wait;"]
           ports:
           - containerPort: 12345 # Ray internal communication.
           - containerPort: 12346 # Ray internal communication.
+          env:
+            - name: CLASSPATH
+              value: "/home/ray/scala-pi.jar"
           # This volume allocates shared memory for Ray to use for its plasma
           # object store. If you do not provide this, Ray will fall back to
           # /tmp which cause slowdowns if is not a shared memory volume.

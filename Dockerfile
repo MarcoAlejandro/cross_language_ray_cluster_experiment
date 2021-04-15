@@ -3,6 +3,8 @@
 
 FROM rayproject/ray:nightly
 
+USER ray
+
 # Install OpenJDK-8
 RUN sudo apt-get update && \
     sudo apt-get install -y openjdk-8-jdk && \
@@ -23,8 +25,7 @@ WORKDIR /home/ray
 # Setup the CLASSPATH environment variable for Java
 # Might be necessary for running the job.
 COPY scala-pi.jar /home/ray
-ENV CLASSPATH /home/ray/scala-pi.jar
-RUN export CLASSPATH
+RUN echo 'export CLASSPATH=/home/ray/scala-pi.jar' >> ~/.bashrc
 
 # Copy the run on head script
 COPY run-on-head/run_on_head_script.py /home/ray/run_on_head_script.py

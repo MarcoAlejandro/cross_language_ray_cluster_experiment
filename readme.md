@@ -20,8 +20,6 @@ This project test the cross language support for Java in Ray.
 
 Running the scripts in `run-in-single-machine` folder, is straightforward on a single machine/laptop. 
 
-
-
 ### `script_one.py`
 
 1. Execute script: `$ python script_one.py`
@@ -60,9 +58,7 @@ Pi is: 3.1414846
 ## Running the application in the head node from the Ray cluster.  
 
 It's possible to [setup](https://docs.ray.io/en/master/cluster/kubernetes.html#the-ray-kubernetes-operator) 
-a Ray cluster in Kubernetes with Autoscaler.
-
-For that, the following are required in the kubernetes cluster: 
+a Ray cluster in Kubernetes with Autoscaler. For that, the following are required in the kubernetes cluster: 
 
 - The `RayCluster` custom resource must be [configured](https://github.com/ray-project/ray/blob/ray-1.2.0/python/ray/autoscaler/kubernetes/operator_configs/cluster_crd.yaml).
 - The _Operator_ pod must be [started](https://github.com/ray-project/ray/blob/ray-1.2.0/python/ray/autoscaler/kubernetes/operator_configs/operator.yaml).
@@ -117,7 +113,3 @@ I haven't been able to run this strategy with success.
 
 This discussion might lead to a way to do it: 
 https://discuss.ray.io/t/kubernetes-job-running-a-cross-language-java-class/1631
-
------
-
-## Running the application using the Ray Client  API
